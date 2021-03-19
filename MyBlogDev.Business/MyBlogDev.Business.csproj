@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.1.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\MyBlogDev.Core\MyBlogDev.Core.csproj" />
     <ProjectReference Include="..\MyBlogDev.DataAccess\MyBlogDev.DataAccess.csproj" />
     <ProjectReference Include="..\MyBlogDev.Entities\MyBlogDev.Entities.csproj" />
