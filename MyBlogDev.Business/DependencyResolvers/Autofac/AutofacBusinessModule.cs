@@ -15,6 +15,9 @@ namespace MyBlogDev.Business.DependencyResolvers.Autofac
         {
             builder.RegisterType<ArticleManager>().As<IArticleService>();
             builder.RegisterType<EfArticleDal>().As<IArticleDal>();
+
+            builder.RegisterType<CategoryManager>().As<ICategoryService>();
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>();
         }
     }
 }

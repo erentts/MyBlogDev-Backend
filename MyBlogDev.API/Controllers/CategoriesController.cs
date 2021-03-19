@@ -5,26 +5,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MyBlogDev.Business.Abstract;
-using MyBlogDev.Business.Constants;
 using MyBlogDev.Entities.Concrete;
 
 namespace MyBlogDev.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ArticlesController : ControllerBase
+    public class CategoriesController : ControllerBase
     {
-        private IArticleService _articleService;
+        private ICategoryService _categoryService;
 
-        public ArticlesController(IArticleService articleService)
+        public CategoriesController(ICategoryService categoryService)
         {
-            _articleService = articleService;
+            _categoryService = categoryService;
         }
 
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _articleService.GetAll();
+            var result = _categoryService.GetList();
             if (result.Success)
             {
                 return Ok(result.Data);
@@ -34,21 +33,9 @@ namespace MyBlogDev.API.Controllers
         }
 
         [HttpGet("getbyid")]
-        public IActionResult GetById(int articleId)
+        public IActionResult GetById(int categoryId)
         {
-            var result = _articleService.GetById(articleId);
-            if (result.Success)
-            {
-                return Ok(result.Data);
-            }
-
-            return BadRequest(result.Message);
-        }
-
-        [HttpGet("getbycategory")]
-        public IActionResult GetListByCategory(int categoryId)
-        {
-            var result = _articleService.GetListByCategory(categoryId);
+            var result = _categoryService.GetById(categoryId);
             if (result.Success)
             {
                 return Ok(result.Data);
@@ -58,21 +45,9 @@ namespace MyBlogDev.API.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Article article)
+        public IActionResult Add(Category category)
         {
-            var result = _articleService.Add(article);
-            if (result.Success)
-            {
-                return Ok(result.Message);
-            }
-
-            return BadRequest(result.Message);
-        }
-
-        [HttpPost("update")]
-        public IActionResult Update(Article article)
-        {
-            var result = _articleService.Update(article);
+            var result = _categoryService.Add(category);
             if (result.Success)
             {
                 return Ok(result.Message);
@@ -82,9 +57,21 @@ namespace MyBlogDev.API.Controllers
         }
 
         [HttpPost("delete")]
-        public IActionResult Delete(Article article)
+        public IActionResult Delete(Category category)
         {
-            var result = _articleService.Delete(article);
+            var result = _categoryService.Delete(category);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+
+            return BadRequest(result.Message);
+        }
+
+        [HttpPost("update")]
+        public IActionResult Update(Category category)
+        {
+            var result = _categoryService.Update(category);
             if (result.Success)
             {
                 return Ok(result.Message);

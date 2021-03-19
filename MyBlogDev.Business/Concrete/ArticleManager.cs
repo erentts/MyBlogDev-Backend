@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MyBlogDev.Business.Abstract;
+using MyBlogDev.Business.Constants;
 using MyBlogDev.Core.Utilities.Results;
 using MyBlogDev.DataAccess.Abstract;
 using MyBlogDev.Entities.Concrete;
@@ -36,19 +37,19 @@ namespace MyBlogDev.Business.Concrete
         public IResult Add(Article article)
         {
             _articleDal.Add(article);
-            return new SuccessResult("Makale eklendi");
+            return new SuccessResult(ArticleMessage.ArticleAdded);
         }
 
         public IResult Delete(Article article)
         {
             _articleDal.Delete(article);
-            return new SuccessResult("Makale silindi");
+            return new SuccessResult(ArticleMessage.ArticleDeleted);
         }
 
         public IResult Update(Article article)
         {
             _articleDal.Update(article);
-            return new SuccessResult("Makale guncellendi");
+            return new SuccessResult(ArticleMessage.ArticleUpdated);
         }
     }
 }
