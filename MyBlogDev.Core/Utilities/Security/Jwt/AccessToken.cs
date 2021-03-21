@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MyBlogDev.Core.Utilities.Security
+namespace MyBlogDev.Core.Utilities.Security.Jwt
 {
     public class AccessToken
     {
