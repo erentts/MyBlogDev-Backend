@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using MyBlogDev.Business.Abstract;
 using MyBlogDev.Business.Constants;
 using MyBlogDev.Entities.Concrete;
@@ -22,6 +23,7 @@ namespace MyBlogDev.API.Controllers
         }
 
         [HttpGet("getall")]
+        [Authorize(Roles = "Articles.List")]
         public IActionResult GetAll()
         {
             var result = _articleService.GetAll();

@@ -34,9 +34,9 @@ namespace MyBlogDev.Business.Concrete
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == userId));
         }
 
-        public IDataResult<User> GetByMail(string email)
+        public User GetByMail(string email)
         {
-            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+            return _userDal.Get(u => u.Email == email);
         }
 
         public IResult Add(User user)
