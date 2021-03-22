@@ -9,5 +9,11 @@ namespace MyBlogDev.Business.Constants
         public static string UserAdded = "Kullanıcı başarıyla eklendi";
         public static string UserDeleted = "Kullanıcı başarıyla silindi";
         public static string UserUpdated = "Kullanıcı başarıyla güncellendi";
+
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError = "Şifre hatalı";
+        public static string SuccessfulLogin = "Giriş başarılı";
+
+        public static string UserAlreadyExists = "Bu kullanıcı zaten mevcut";
     }
 }
