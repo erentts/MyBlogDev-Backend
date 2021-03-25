@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using MyBlogDev.Business.Abstract;
 using MyBlogDev.Business.Constants;
+using MyBlogDev.Business.ValidationRules.FluentValidation;
+using MyBlogDev.Core.CrossCuttingConcerns.Validation.FluentValidation;
 using MyBlogDev.Core.Utilities.Results;
 using MyBlogDev.DataAccess.Abstract;
 using MyBlogDev.Entities.Concrete;
@@ -34,6 +36,7 @@ namespace MyBlogDev.Business.Concrete
             return new SuccessDataResult<List<Article>>(_articleDal.GetList(a => a.CategoryId == categoryId).ToList());
         }
 
+        //[ValidationAspect(typeof(ArticleValidator))]
         public IResult Add(Article article)
         {
             _articleDal.Add(article);
