@@ -5,6 +5,7 @@ using System.Text;
 using MyBlogDev.Business.Abstract;
 using MyBlogDev.Business.Constants;
 using MyBlogDev.Business.ValidationRules.FluentValidation;
+using MyBlogDev.Core.Aspects.Autofac.Transaction;
 using MyBlogDev.Core.Aspects.Autofac.Validation;
 using MyBlogDev.Core.CrossCuttingConcerns.Validation.FluentValidation;
 using MyBlogDev.Core.Utilities.Results;
@@ -53,6 +54,14 @@ namespace MyBlogDev.Business.Concrete
         public IResult Update(Article article)
         {
             _articleDal.Update(article);
+            return new SuccessResult(ArticleMessage.ArticleUpdated);
+        }
+
+        [TransactionScopeAspect]
+        public IResult TransactionalOperation(Article article)
+        {
+            _articleDal.Update(article);
+            //_articleDal.Add(article);
             return new SuccessResult(ArticleMessage.ArticleUpdated);
         }
     }

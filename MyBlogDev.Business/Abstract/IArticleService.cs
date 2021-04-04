@@ -14,5 +14,6 @@ namespace MyBlogDev.Business.Abstract
         IResult Add(Article article);
         IResult Delete(Article article);
         IResult Update(Article article);
+        IResult TransactionalOperation(Article article);
     }
 }

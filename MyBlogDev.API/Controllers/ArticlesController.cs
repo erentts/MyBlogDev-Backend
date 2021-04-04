@@ -94,5 +94,17 @@ namespace MyBlogDev.API.Controllers
 
             return BadRequest(result.Message);
         }
+
+        [HttpPost("transaction")]
+        public IActionResult TransactionTest(Article article)
+        {
+            var result = _articleService.TransactionalOperation(article);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+
+            return BadRequest(result.Message);
+        }
     }
 }
