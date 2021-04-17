@@ -14,6 +14,9 @@ using System.Threading.Tasks;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using MyBlogDev.Core.DependencyResolvers;
+using MyBlogDev.Core.Extensions;
+using MyBlogDev.Core.Utilities.IoC;
 using MyBlogDev.Core.Utilities.Security.Encyption;
 using MyBlogDev.Core.Utilities.Security.Jwt;
 
@@ -31,7 +34,6 @@ namespace MyBlogDev.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
             services.AddCors(options =>
             {
@@ -54,6 +56,12 @@ namespace MyBlogDev.API
                     IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                 };
             });
+
+            services.AddDependencyResolvers(new ICoreModule[]
+            {
+                new CoreModule(),
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyBlogDev.API", Version = "v1" });
