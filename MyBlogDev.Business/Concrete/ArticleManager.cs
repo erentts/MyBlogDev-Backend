@@ -5,6 +5,7 @@ using System.Text;
 using MyBlogDev.Business.Abstract;
 using MyBlogDev.Business.Constants;
 using MyBlogDev.Business.ValidationRules.FluentValidation;
+using MyBlogDev.Core.Aspects.Autofac.Caching;
 using MyBlogDev.Core.Aspects.Autofac.Transaction;
 using MyBlogDev.Core.Aspects.Autofac.Validation;
 using MyBlogDev.Core.CrossCuttingConcerns.Validation.FluentValidation;
@@ -33,12 +34,14 @@ namespace MyBlogDev.Business.Concrete
             return new SuccessDataResult<List<Article>>(_articleDal.GetList().ToList());
         }
 
+        [CacheAspect(duration:10)]
         public IDataResult<List<Article>> GetListByCategory(int categoryId)
         {
             return new SuccessDataResult<List<Article>>(_articleDal.GetList(a => a.CategoryId == categoryId).ToList());
         }
 
         [ValidationAspect(typeof(ArticleValidator),Priority = 1)]
+        [CacheRemoveAspect("IArticleService.Get")]
         public IResult Add(Article article)
         {
             _articleDal.Add(article);
